@@ -1,0 +1,142 @@
+
+-------Installing GIT
+
+Version Contro System (VCS) for traking changes in computer files
+
+Rabotis vo lokalni repositories no ako sakame posle moze da gi stavime na remote repository kako GitHub
+
+-Kepps track of code history
+-Takes "snapshots" of your files
+- You decide when to take snapshot by making a commit
+- You can visit any snapshot at any time 
+- You can stage files before commiting
+
+tips: preporaka cmder da instalirame so koj se instalira i Git a kako text tool da koristime ATOM
+
+Proverka dali imame instalirano Git   git --version
+
+Sledno treba da se setira user name za primer ako nekoj menuva da znaeme koj menuva		
+		git config --global user.name dalibor
+		
+Treba i mail da se setira
+		git config --global user.email ars.dalibor@gmail.com
+		
+Proverka koj user name ni e setiran
+		git config user.name
+
+repository - container for a project you want to track with a Git
+commit e kako save points vo igra, sejvuvame, moze da sejvuvame kolku sakame i posle da se vratime na kooj sakame
+
+Basic Commands
+- git init 		//Initialize Local Git Repository .git Otkako e startuvan ovoj folder kako repository moze da se kucat drugi komandi. ls -a za proverka na folderot. Koga ke go inicijalizirame ni gi sledi site promeni vo nego.
+- git add <file>    //Add File(s) To Index. Za da dodades povekje fajlovi git add file.js file2.js file3.js. Moze i git add .   i tuka ke gi dodade site vo staging 
+- git status    /Check Status of Working Tree
+- git rm --cached index.html         -  da go trgne od staging area 
+- git commit -m	// Commit changes in Indeks. Najdobr so       git commit -m "Created new index.html"   ili "fixing bug in header"      -m znaci da si stavis komentar
+- git log 			- ke dade vreme koga i sto e komitirano so komentarot potoa moze rstore da napravime so git checkout <commit hash>.       git log --oneline     skrateno da dade samo so komentari
+- git push		// Push To Remote Repository
+- git diff			da gi vidime promenite
+- git restore 		da gi vratime na posledniot commit
+- git checkout master
+- git checkout <commit hash>
+- git branch <name>
+- git merge <name> 
+- git revert <commit hash>
+- git reset <commit hash>
+
+----Staging and commit files
+
+tips: Vo Atom gi oznacuva so zeleno fajlovite na koi ima promena a koi sto ne se seuste commit-irani. No za da gi Commit-irame prvo treba da se stavat vo Staging
+
+git status - ke pokaze koi fajlovi se vo staging a ne se seuste commit-irai. Ako se vo Untrack files so crveno znaci se modificirani no seuste ne se vo staging(promer ako sme kreirale nov fajl). Za da se vo staging treba da go dodademe so git add fajlot
+Posle pak so git status i ke gi dade zelen deka vo staging i deka treba da se napravi commit 
+				
+Moze i dvata fajla da se stavat vo staging i posle git commit -m "xxx" ke napravi na dvata commit 
+
+Ako sakame da se vratime na nekoj commit 
+
+		git log
+		
+		git checkout <commit hash>           toa komit hash ke go vidime vo git log, golemiot broj
+		
+ --- Branches ----
+ 
+ Po default so gornoto rabotime vo Master branch. Ako ne sakame da rabotime na produkcija i da dodavame commit s na master branches ke si napravime branch koja e eden vid test. i ako sakame nekoj posle ke go merdzame so master 
+ Ova go zema posledniot commit i go kopira i vo nego rabotime. Dobro e ako povkje rabotat na ist proekt i koga ke zavrsat samo merge ke napravat ako se zadovolni ako ne ke ignoriraat deka lokal branch nema da go afektira master branch
+
+ 
+ Proverka so sto rabotime			 
+				git brunch 
+				git brunch -a 			da gi pokaze site branches, * e raboten 
+ 
+ Ako vratime so git checkout nema da bideme vo master vekje i da se vratime pak na master 
+				git checkout master
+				git checkout xxx	smena na branch
+				
+Moze i svoj branck da si napravime 
+					git branch <name>
+					
+Psole da se vnimava git log ke go dade no ako smenime git checkout master so git log nema da go dade deka toa bese lokalno vo toj branch. 
+Ako sakame da gi merdjame od lokalniot branch vo master branch 
+					git merge <name>     imeto od branch-ot 
+					
+Posle so git log ke go dade 
+
+Da izbriseme nekoj branch 	
+								git branch -d xxxx				so malo d ako e megan branch-ot
+								git branch -D xxxx				vo sprotivno
+
+tips: git checkout -b xxxx		ja kreira i odma ja chekira								
+
+------- UNDOING TINGS
+
+Checkout commint 	- Najbezbedno. Ova e readonly. Primer sakame da se vratime da vidime nekoj save i moze da go otvorime i samo readonly odnosno nemoze da napravime nikakva promena na toj commit
+					git checkout <commit hash>
+					
+Revert commit 		- ne tolku bezbedno. Ne go brise toj commit no ke go aplicira i ke napravi nov commit so Revert 
+					git revert <commit hash>
+					
+Reset commit 		- naj ne bezbedno. Ako sakame da se vratime primer 3 commit-a nazad ke gi izbrise site posle nego. Ova go pravime ako sme sigurni deka slednite nema da ni trebaat
+					git reset <commit hash>
+					git reset <commit hash> --hard 				so ova ke izbrise site promeni posle toj commit i od text editor-ot 
+
+					
+					
+-------------------------GIT HUB--------------------------------------------
+
+Central online repository which multiple tam-memebers could access
+
+Moze da ja cloniras sodrzinata lokalno za da rabotime lokalno, posle la prakjas na github i drugite moze da si go simnat update-ot lokalno za da si rabotat
+
+Ako nemame lokalno repo moze i na GitHub da kreirame pa posle da go povleceme
+
+
+
+Za da prefrlime od lokalno na GitHub prvo go kopirame linkot sto ke ni go dade pri kreiranje i definirame koj branch da go pratime
+
+			git push http://xxxxxxxx master
+
+tips za sekogas da ne go kopirame linkot moze alias da stavime 
+
+			git remote add origin http://xxx 					sega origin ni e linkot
+			
+			git remote -v 										proverka koj e alias
+			
+tips: Koga prefrlame se prefrla i commit history 
+
+Kreiranje na GitHub na New, pa davame ime i birame Public ili Private ama za Private treba premium account okolu 7eur mesecno. Go kopirame linkot i so slednovo da go snimime lokalno
+
+			git clone http://xxx 
+			
+Posle treba da vlezeme vo nego cd xxx
+
+Da gi merdzame remote so lokalni i ke gi merdza tie kaj sto ima promena
+			
+			git pull origin master 
+			
+Tips: Ako rabotime vo grupa i lokalno rabotam na nekoj branch pred da go merdzam so master branch sakam da go dadam na github za drugite da go vidat i proverat 
+
+			git puss origin nameofbranch
+			
+na github ima compare i pull request da gi sporedi i ako ni se dopagjaat moze da gi merdzame so master-ot. Potoa moze i komentar da stavime i da napravime Create Pull Request i so ova site ke dobijat notifikacija 
+za da review napravat i moze koment da stavat i ako e se vo red klikame merge 
